@@ -1,0 +1,11 @@
+[users]
+${instance_one}
+${instance_two}
+${instance_three}
+
+[masters]
+master ansible_host=${instance_one} ansible_user=ubuntu
+
+[workers]
+worker1 ansible_host=${instance_two} ansible_user=ubuntu
+worker2 ansible_host=${instance_three} ansible_user=ubuntu
