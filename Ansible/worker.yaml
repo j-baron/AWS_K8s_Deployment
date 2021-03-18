@@ -1,6 +1,6 @@
 ---
 - hosts: workers
-  remote_user: ansible
+  remote_user: ubuntu
   become: yes
   become_method: sudo
   become_user: root
@@ -29,7 +29,7 @@
        msg: "{{ joined_or_not.stdout }}"
 
 - hosts: masters
-  remote_user: ansible
+  remote_user: ubuntu
   become: yes
   become_method: sudo
   become_user: root
@@ -40,7 +40,7 @@
 
    - name: Configure kubectl command auto-completion.
      lineinfile:
-       dest: /home/{{ ansible_user }}/.bashrc
+       dest: /home/{{ ubuntu_user }}/.bashrc
        line: 'source <(kubectl completion bash)'
        insertafter: EOF
 ...

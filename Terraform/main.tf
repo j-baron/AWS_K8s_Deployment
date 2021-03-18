@@ -51,7 +51,6 @@ module "ec2_cluster" {
   monitoring             = true
   vpc_security_group_ids = [module.kubernetes_sg.this_security_group_id]
   subnet_id              = module.vpc.public_subnets[0]
-  user_data = "adduser --quiet --disabled-password --shell /bin/bash --home /home/ansible --gecos 'User' ansible; echo 'ansible:ansible' | chpasswd"
 
   tags = {
     Terraform   = "true"

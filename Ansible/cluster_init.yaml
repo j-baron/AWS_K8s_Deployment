@@ -1,6 +1,6 @@
 ---
 - hosts: masters
-  remote_user: ansible
+  remote_user: ubuntu
   become: yes
   become_method: sudo
   become_user: root
@@ -35,40 +35,40 @@
    - pause: seconds=30
 
    - name: Create directory for kube config.
-     become_user: ansible
+     become_user: ubuntu
      become_method: sudo
      become: yes
      file: 
-       path: /home/{{ansible_user }}/.kube
+       path: /home/{{ubuntu_user }}/.kube
        state: directory
-       owner: "{{ ansible_user }}"
-       group: "{{ ansible_user }}"
+       owner: "{{ ubuntu_user }}"
+       group: "{{ ubuntu_user }}"
        mode: 0755
 
-   - name: Copy /etc/kubernetes/admin.conf to user's home directory /home/{{ ansible_user }}/.kube/config.
+   - name: Copy /etc/kubernetes/admin.conf to user's home directory /home/{{ ubuntu_user }}/.kube/config.
      become_user: root
      become_method: sudo
      become: yes
      copy:
        src: /etc/kubernetes/admin.conf
-       dest: /home/{{ ansible_user }}/.kube/config
+       dest: /home/{{ ubuntu_user }}/.kube/config
        remote_src: yes
-       owner: "{{ ansible_user }}"
-       group: "{{ ansible_user }}"
+       owner: "{{ ubuntu_user }}"
+       group: "{{ ubuntu_user }}"
        mode: '0644'
 
    - pause: seconds=10
 
    - name: Remove the cache directory.
-     become_user: ansible
+     become_user: ubuntu
      become_method: sudo
      become: yes
      file: 
-       path: /home/{{ ansible_user }}/.kube/cache
+       path: /home/{{ ubuntu_user }}/.kube/cache
        state: absent
 
    - name: Create Pod Network & RBAC.
-     become_user: ansible
+     become_user: ubuntu
      become_method: sudo
      become: yes
      command: "{{ item }}"
